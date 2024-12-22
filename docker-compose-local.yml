@@ -1,34 +1,61 @@
 services:
 
-  database:
+  energy-db:
     build:
-      context: ./database
+      context: ./energy_db
       dockerfile: ./Dockerfile
     env_file:
       - .env
+    environment:
+      - POSTGRES_HOST=${ENERGY_HOST}
+      - POSTGRES_PORT=${ENERGY_PORT}
+      - POSTGRES_DB=${ENERGY_DB}
+      - POSTGRES_USER=${ENERGY_USER}
+      - POSTGRES_PASSWORD=${ENERGY_PASSWORD}
     ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+      - ${ENERGY_PORT}:${DJANGO_PORT}
     networks:
       - rococo
-    container_name: database
+    container_name: energy-db
     healthcheck:
-      test: ["CMD-SHELL", "PGPASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "PGPASSWORD=${ENERGY_PASSWORD} pg_isready -U ${ENERGY_USER} -h localhost -d ${ENERGY_DB}"]
       interval: 3s
       timeout: 5s
       retries: 10
 
-#  migrator:
-#    build:
-#      context: ./migrator
-#      dockerfile: ./Dockerfile
-#    env_file:
-#      - .env
-#    networks:
-#      - rococo
-#    depends_on:
-#      database:
-#        condition: service_healthy
-#    container_name: migrator
+  django-db:
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=${DJANGO_HOST}
+      - POSTGRES_PORT=${DJANGO_PORT}
+      - POSTGRES_DB=${DJANGO_DB}
+      - POSTGRES_USER=${DJANGO_USER}
+      - POSTGRES_PASSWORD=${DJANGO_PASSWORD}
+    ports:
+      - ${DJANGO_PORT}:${DJANGO_PORT}
+    networks:
+      - rococo
+    container_name: django-db
+    healthcheck:
+      test: ["CMD-SHELL", "PGPASSWORD=${DJANGO_PASSWORD} pg_isready -U ${DJANGO_USER} -h localhost -d ${DJANGO_DB}"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  migrator:
+    build:
+      context: ./migrator
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    networks:
+      - rococo
+    depends_on:
+      energy-db:
+        condition: service_healthy
+    container_name: migrator
 
 networks:
   rococo:

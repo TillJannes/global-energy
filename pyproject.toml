@@ -6,12 +6,16 @@ authors = ["Till Meinel <tilljannesmeinel@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 pre-commit = "^4.0.1"
 django = "^5.1.4"
 psycopg2-binary = "^2.9.10"
 django-crispy-forms = "^2.3"
 crispy-bootstrap5 = "^2024.10"
+dagster = "^1.9.6"
+dagster-webserver = "^1.9.6"
+pandera = "^0.21.1"
+pydantic = "^2.10.4"
 
 
 [build-system]

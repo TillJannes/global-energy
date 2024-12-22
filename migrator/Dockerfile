@@ -5,4 +5,4 @@ RUN mkdir /scripts \
 COPY ./0001_setup.sql /scripts
 
 WORKDIR /
-CMD ["/bin/sh", "-c", "/usr/bin/psql postgresql://${ENERGY_USER}:${ENERGY_PASSWORD}@${ENERGY_HOST}:${ENERGY_PORT}/${ENERGY_DB} -f /scripts/0001_setup.sql"]
+CMD ["/bin/sh", "-c", "/usr/bin/psql postgresql://${ENERGY_USER}:${ENERGY_PASSWORD}@energy-db:${ENERGY_PORT}/${ENERGY_DB} -f /scripts/0001_setup.sql"]

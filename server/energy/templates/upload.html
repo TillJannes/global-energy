@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Upload form for energy timeseries</h1>
+    <br></br>
+    {% if submitted %}
+        <div class="alert alert-dismissible alert-success">
+            <strong>All righty!</strong> File was uploaded successfully.
+            <a href="/upload">Upload more data.</a>
+            <a href="/">Home</a>
+        </div>
+
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+    {% endif %}
+{% endblock content %}

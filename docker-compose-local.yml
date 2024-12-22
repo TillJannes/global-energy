@@ -1,11 +1,7 @@
 services:
 
   energy-db:
-    build:
-      context: ./energy_db
-      dockerfile: ./Dockerfile
-    env_file:
-      - .env
+    image: postgres:latest
     environment:
       - POSTGRES_HOST=localhost
       - POSTGRES_PORT=${ENERGY_PORT}
@@ -13,7 +9,7 @@ services:
       - POSTGRES_USER=${ENERGY_USER}
       - POSTGRES_PASSWORD=${ENERGY_PASSWORD}
     ports:
-      - ${ENERGY_PORT}:${ENERGY_PORT}
+      - ${ENERGY_PORT}:5432
     networks:
       - rococo
     container_name: energy-db
@@ -25,8 +21,6 @@ services:
 
   django-db:
     image: postgres:latest
-    env_file:
-      - .env
     environment:
       - POSTGRES_HOST=localhost
       - POSTGRES_PORT=${DJANGO_PORT}
@@ -34,7 +28,7 @@ services:
       - POSTGRES_USER=${DJANGO_USER}
       - POSTGRES_PASSWORD=${DJANGO_PASSWORD}
     ports:
-      - ${DJANGO_PORT}:${DJANGO_PORT}
+      - ${DJANGO_PORT}:5432
     networks:
       - rococo
     container_name: django-db

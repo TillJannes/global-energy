@@ -16,6 +16,7 @@ dagster = "^1.9.6"
 dagster-webserver = "^1.9.6"
 pandera = "^0.21.1"
 pydantic = "^2.10.4"
+orchestrator = {path = "orchestrator", develop = true}
 
 
 [build-system]

@@ -18,7 +18,9 @@ pandera = "^0.21.1"
 pydantic = "^2.10.4"
 orchestrator = {path = "orchestrator", develop = true}
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.dagster]
+module_name = "orchestrator.orchestrator.defintions"

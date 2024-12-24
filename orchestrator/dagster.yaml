@@ -1,0 +1,7 @@
+storage:
+  sqlite:
+    base_dir:
+      env: TMP_FILES_DIR
+
+telemetry:
+  enabled: false

@@ -23,4 +23,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.dagster]
-module_name = "orchestrator.orchestrator.defintions"
+module_name = "orchestrator.defintions"

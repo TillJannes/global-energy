@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "name": "Run dagster",
+            "module": "dagster",
+            "args": [
+                "dev",
+                "-w",
+                "${workspaceFolder}/orchestrator/workspace.yaml",
+                "-p",
+                "3000"
+            ],
+            "console": "integratedTerminal",
+            "envFile": ".env",
+        }
+    ]
+}

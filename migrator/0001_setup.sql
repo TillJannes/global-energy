@@ -1,9 +1,7 @@
-CREATE SCHEMA IF NOT EXISTS eschema;
+CREATE SCHEMA IF NOT EXISTS e_schema;
 
-CREATE TABLE IF NOT EXISTS eschema.conf_files(
+CREATE TABLE IF NOT EXISTS e_schema.consumers(
     id SERIAL PRIMARY KEY,
-    name TEXT,
-    date_added DATE,
-    description TEXT,
-    path TEXT
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(200)
 );

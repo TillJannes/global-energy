@@ -17,6 +17,8 @@ dagster-webserver = "^1.9.6"
 pandera = "^0.21.1"
 pydantic = "^2.10.4"
 orchestrator = {path = "orchestrator", develop = true}
+dagster-pandera = "^0.26.6"
+httpx = "^0.28.1"
 
 [build-system]
 requires = ["poetry-core"]
